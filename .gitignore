@@ -1,0 +1,10 @@
+*.pyc
+venv
+mypylib.so
+test.c
+test.so
+.vscode/
+test_vlib.so
+pyvlang.egg-info/
+dist
+__pycache__
