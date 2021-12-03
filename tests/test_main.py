@@ -13,6 +13,7 @@ def test_main():
     VLang.make_lib("test.v")
     lib = VLang("./test.so")
     assert lib.add(1, 2) == 3
+    assert lib.echo("hello world") == "hello world"
 
 
 def test_from_v():

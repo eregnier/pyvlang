@@ -9,7 +9,7 @@ class VLang:
 
     def __getattr__(self, attr):
         """Transparently access library methods from this object"""
-        function = getattr(self.lib, "main__{}".format(attr), None)
+        function = getattr(self.lib, attr, None)
 
         def execute(*args):
             return function(*args)
