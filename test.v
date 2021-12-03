@@ -4,8 +4,10 @@ fn add(x int, y int) int {
 }
 
 [export: 'echo']
-fn echo(text string) string {
-    return text
+fn echo(ctext &char) &char {
+    mut s := unsafe { cstring_to_vstring(ctext) }
+    /// do stuff with `s`
+    return s.str
 }
 
 fn main() {

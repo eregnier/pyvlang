@@ -1,5 +1,5 @@
 import os
-
+import ctypes
 from pyvlang import VLang
 
 
@@ -9,11 +9,10 @@ def test_compile():
     os.remove("/tmp/test-pyvlang.so")
 
 
-def test_main():
+def test_add_int():
     VLang.make_lib("test.v")
     lib = VLang("./test.so")
     assert lib.add(1, 2) == 3
-    assert lib.echo("hello world") == "hello world"
 
 
 def test_from_v():
@@ -21,6 +20,10 @@ def test_from_v():
 
 
 def test_string():
-    # This is not working at the moment for some reason I ignore. I'll ask vlang author if he has any clue.
-    # assert VLang.from_v("./test.v").echo("test") == "test"
-    pass
+    VLang.make_lib("test.v")
+    lib = VLang("./test.so")
+
+    lib.echo.restype = ctypes.c_char_p
+    lib.echo.argtypes = [ctypes.c_char_p]
+    res = lib.echo("hello world".encode())
+    assert ctypes.c_char_p(res).value.decode("UTF-8") == "hello world"
