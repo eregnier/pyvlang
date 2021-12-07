@@ -29,4 +29,5 @@ jobs:
       - name: Run unit tests
         run: |
           pip install -r requirements-dev.txt
+          pip install .
           pytest -xs
